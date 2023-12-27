@@ -3,7 +3,8 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://mytestpages.github.io/qweasd",
+  site: "https://mytestpages.github.io",
+  base: "/qweasd",
   integrations: [tailwind()],
   redirects: {
     "/": "/qweasd/articles/1",
