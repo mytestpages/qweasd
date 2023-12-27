@@ -4,7 +4,6 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mytestpages.github.io/qweasd",
-  base: "/qweasd",
   integrations: [tailwind()],
   redirects: {
     "/": "/qweasd/articles/1",
