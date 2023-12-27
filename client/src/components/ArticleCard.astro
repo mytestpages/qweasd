@@ -1,0 +1,44 @@
+---
+import CategoryTags from "./CategoryTags.astro";
+
+const { article } = Astro.props;
+---
+
+<div
+  class="card relative flex h-full flex-col overflow-hidden rounded-md bg-gray-700"
+>
+  <img
+    loading="lazy"
+    class="absolute h-52 w-full object-cover md:relative"
+    src={`http://localhost:1337${article.cover_image.data.attributes.formats.thumbnail.url}`}
+    alt=""
+  />
+  <div class="z-21 relative flex-1 bg-black/75 md:z-0 md:bg-transparent">
+    <div class="card__content flex h-full flex-col px-5 py-5 md:pb-0">
+      <CategoryTags categories={article.categories} />
+
+      <h4 class="card__title mt-auto text-2xl font-semibold">
+        {article.title}
+      </h4>
+      <p class="card__description mt-2 line-clamp-3">
+        {article.description}
+      </p>
+    </div>
+  </div>
+
+  <div class="card__link text-center md:mt-2">
+    <a
+      class="button group relative block w-full cursor-pointer overflow-hidden bg-teal-600 px-3 py-1 transition-all hover:bg-white"
+      href={`/articles/${article.slug}`}
+    >
+      <span
+        class="-z-1 absolute bottom-0 left-0 h-0 w-0 bg-white transition-all duration-500 ease-out group-hover:h-full group-hover:w-full"
+      ></span>
+      <span
+        class="relative z-10 w-full text-white transition-colors duration-300 ease-in-out group-hover:text-teal-600"
+      >
+        Read more
+      </span>
+    </a>
+  </div>
+</div>

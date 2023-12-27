@@ -1,0 +1,50 @@
+---
+import { baseApi } from "../logic/BaseApi";
+
+import ArticleHeroWrapper from "./ArticleHeroWrapper.astro";
+import FormatedDate from "./FormatedDate.astro";
+
+const data = await baseApi("articles", {
+  "populate[0]": "categories",
+  "populate[1]": "cover_image",
+  "sort[2]": "publishedAt:desc",
+  "pagination[limit][3]": "1",
+});
+
+const article = data[0];
+---
+
+<ArticleHeroWrapper
+  coverImagePath={article.attributes.cover_image.data.attributes.formats
+    .thumbnail.url}
+>
+  <h2 class="mt-5 text-2xl font-semibold">
+    <a
+      class="duration-200 ease-in hover:text-teal-500"
+      href={`/articles/${article.attributes.slug}`}
+      >{article.attributes.title}</a
+    >
+  </h2>
+  <p class="mt-5">
+    {article.attributes.description}
+  </p>
+  <div
+    class="mt-5 flex flex-row items-center justify-between md:flex-col md:items-start"
+  >
+    <FormatedDate date={article.attributes.publishedAt} />
+
+    <a
+      class="button group relative cursor-pointer overflow-hidden rounded-md bg-teal-500 px-3 py-1 transition-all hover:bg-white md:mt-5"
+      href={`/articles/${article.attributes.slug}`}
+    >
+      <span
+        class="-z-1 absolute bottom-0 left-0 h-0 w-0 bg-white transition-all duration-500 ease-out group-hover:h-full group-hover:w-full"
+      ></span>
+      <span
+        class="relative z-10 w-full text-white transition-colors duration-300 ease-in-out group-hover:text-teal-500"
+      >
+        read more
+      </span>
+    </a>
+  </div>
+</ArticleHeroWrapper>

@@ -1,0 +1,77 @@
+---
+import PaginationLinkItem from "./PaginationLinkItem.astro";
+import urlPattern from "../helpers/urlPattern";
+
+interface Props {
+  total: number;
+  pattern: string;
+  currentPage: number;
+}
+
+const { total, pattern, currentPage } = Astro.props;
+
+let numList: number[] = [];
+let l = currentPage - 2;
+const r = currentPage + 2;
+
+for (let index = 1; index <= total; index++) {
+  if (index >= l && index <= r) {
+    numList.push(index);
+  }
+}
+---
+
+<div class="pagination-container mt-10">
+  <ul class="pagination-pages mt-5 flex justify-center gap-2">
+    {
+      currentPage - 2 > 1 && (
+        <li data-page={1}>
+          <PaginationLinkItem href={urlPattern(pattern, 1)} title="<<" />
+        </li>
+      )
+    }
+
+    {
+      currentPage - 1 !== 0 && (
+        <li data-page={1}>
+          <PaginationLinkItem
+            href={urlPattern(pattern, currentPage - 1)}
+            title="<"
+          />
+        </li>
+      )
+    }
+
+    {
+      numList.map(i => (
+        <li data-page={i}>
+          <PaginationLinkItem
+            href={urlPattern(pattern, i)}
+            title={i.toString()}
+            class:list={[
+              currentPage === i ? "bg-teal-600 text-white" : "bg-white",
+            ]}
+          />
+        </li>
+      ))
+    }
+
+    {
+      currentPage !== total && (
+        <li data-page={currentPage + 1}>
+          <PaginationLinkItem
+            href={urlPattern(pattern, currentPage + 1)}
+            title=">"
+          />
+        </li>
+      )
+    }
+    {
+      currentPage + 2 < total && (
+        <li data-page={total}>
+          <PaginationLinkItem href={urlPattern(pattern, total)} title=">>" />
+        </li>
+      )
+    }
+  </ul>
+</div>
