@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/news-website",
   integrations: [tailwind()],
   redirects: {
-    "/": "/articles/1",
-    "/articles": "/articles/1",
+    "/": "/news-website/articles/1",
+    "/articles": "/news-website/articles/1",
   },
 });
