@@ -4,10 +4,10 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mytestpages.github.io",
-  base: "/news-website",
+  base: "/qweasd",
   integrations: [tailwind()],
   redirects: {
-    "/": "/news-website/articles/1",
-    "/articles": "/news-website/articles/1",
+    "/": "/qweasd/articles/1",
+    "/articles": "/qweasd/articles/1",
   },
 });
