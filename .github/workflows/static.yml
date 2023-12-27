@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           # Upload entire repository
-          path: './client/dist'
+          path: '.client/dist'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
